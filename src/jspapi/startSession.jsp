@@ -4,17 +4,20 @@
 <%@ page import="ru.georgewl.epam.it.Model" %>
 
 <%
+    out.clear();
     String base= request.getParameter("base");
     if(base!=null){
         try {
             PersistenceHelper.getInstance().start(new Model(), base);
-            %>session started<%
+            out.println("success");
         }
         catch (Exception e) {
-            %>error <%=e%><%
+            out.println(e);
         }
     }
     else{
-        %>need base parameter<%
+        out.clear();
+        out.print("need base parameter");
     }
+    out.close();
 %>

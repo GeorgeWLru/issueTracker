@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="ru.georgewl.epam.it.persistence.PersistenceHelper" %>
 <%@ page import="ru.georgewl.epam.it.model.User" %>
-<%@ page import="ru.georgewl.epam.it.Model" %>
 
 <%
+    out.clear();
     String username= request.getParameter("username");
     String firstname= request.getParameter("firstname");
     String lastname= request.getParameter("lastname");
@@ -20,12 +19,15 @@
         u.setLastName(lastname);
     }
     try {
-        PersistenceHelper.getInstance().start(new Model(), "test");
         PersistenceHelper.getInstance().persist(u);
-        PersistenceHelper.getInstance().stop();
-        %>user created<%
+        out.println("{\"success\":\"yes\",");
+        out.print("\"userid\":");
+        out.println("\"" +u.getId()+ "\"}");
     }
     catch (Exception e) {
-        %>error <%=e%><%
+        out.clear();
+        out.println("{\"success\":\"no\",");
+        out.println("\"error\":\""+e+"\"}");
     }
+    out.close();
 %>

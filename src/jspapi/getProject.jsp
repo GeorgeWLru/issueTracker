@@ -4,17 +4,16 @@
 
 <%
     out.clear();
-    String name= request.getParameter("name");
+    String stringId= request.getParameter("id");
+    Long id= Long.parseLong(stringId);
     
-    Project p= new Project();
-    if(name!=null){
-        p.setName(name);
-    }
     try {
-        PersistenceHelper.getInstance().persist(p);
+        Project p= PersistenceHelper.getInstance().retrieve(Project.class, id);
         out.println("{\"success\":\"yes\",");
-        out.print("\"projectid\":");
-        out.println("\"" +p.getId()+ "\"}");
+        out.println("\"project\":{");
+        out.println("   \"id\":\""+p.getId()+"\",");
+        out.println("   \"name\":\""+p.getName()+"\"");
+        out.println("}}");
     }
     catch (Exception e) {
         out.clear();

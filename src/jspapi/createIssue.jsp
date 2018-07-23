@@ -4,10 +4,13 @@
 <%@ page import="ru.georgewl.epam.it.model.User" %>
 <%@ page import="ru.georgewl.epam.it.model.Project" %>
 <%@ page import="ru.georgewl.epam.it.model.Issue" %>
-<%@ page import="java.lang.Integer" %>
 
 <%
+    out.clear();
     String topic= request.getParameter("topic");
+    String type= request.getParameter("type");
+    String stringPriority= request.getParameter("priority");
+    String description= request.getParameter("description");
     String assignee= request.getParameter("assignee");
     String project= request.getParameter("project");
     
@@ -16,20 +19,36 @@
         if(topic!=null) {
             i.setTopic(topic);
         }
+        if(type!=null) {
+            i.setType(type);
+        }
+        if(stringPriority!=null) {
+            int priority= java.lang.Integer.parseInt(stringPriority);
+            i.setPriority(priority);
+        }
+        if(description!=null) {
+            i.setDescription(description);
+        }
         if(assignee!=null) {
-            long id= Long.getLong(assignee);
+            long id= Long.parseLong(assignee);
             User u= PersistenceHelper.getInstance().retrieve(User.class, id);
             i.setAssigneeRef(PersistenceHelper.getInstance().makeReference(u));
         }
         if(project!=null) {
-            long id= Long.getLong(project);
+            long id= Long.parseLong(project);
             Project p= PersistenceHelper.getInstance().retrieve(Project.class, id);
             i.setProjectRef(PersistenceHelper.getInstance().makeReference(p));
         }
         PersistenceHelper.getInstance().persist(i);
-        %>issue created<%
+        out.println("{\"success\":\"yes\",");
+        out.print("\"issueid\":");
+        out.println("\"" +i.getId()+ "\"}");
     }
     catch (Exception e) {
-        %>error <%=e%><%
+        out.clear();
+        out.println("{\"success\":\"no\",");
+        out.println("\"error\":\""+e+"\"}");
+        throw new Exception(e);
     }
+    out.close();
 %>

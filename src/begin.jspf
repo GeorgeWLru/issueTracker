@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Issue tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="javascript/jquery-3.3.1.js"></script>
+
+<h1>Issue tracker</h1>
+<div>
+
+<div class="headerDiv">
+<a href="/issueTracker">Главная</a>
+</div>
+
+<div class="headerDiv">
+<a href="issues.jsp">Ошибки</a>
+</div>
+
+<div class="headerDiv">
+<a href="users.jsp">Пользователи</a>
+</div>
+
+<div class="headerDiv">
+<a href="projects.jsp">Проекты</a>
+</div>
+
+<div align="right" class="headerDiv">
+<form action="disconnect.jsp" method="get">
+<input type="submit" value="Отключиться"/>
+</form>
+</div>
+
+<div>
+<hr/>

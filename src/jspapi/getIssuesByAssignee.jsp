@@ -6,6 +6,7 @@
 <%@ page import="ru.georgewl.epam.it.model.Issue" %>
 
 <%
+    out.clear();
     String assignee= request.getParameter("assignee");
     
     try {
@@ -17,10 +18,10 @@
         for(Issue i : list){
             //
         }
-
-        %>project created<%
+        
     }
     catch (Exception e) {
-        %>error <%=e%><%
+        out.println(e);
     }
+    out.close();
 %>
