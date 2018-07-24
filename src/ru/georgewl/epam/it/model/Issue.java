@@ -67,7 +67,9 @@ public class Issue extends AbstractPersistable {
         this.description = description;
     }
     
-    @DBForeignKey(table= User.class, column= "ASSIGNEE_USER_ID")
+    public static final String ASSIGNEE_USER_ID="ASSIGNEE_USER_ID";
+    
+    @DBForeignKey(table= User.class, column= ASSIGNEE_USER_ID)
     private Reference assigneeRef;
     
     public Reference getAssigneeRef() {
@@ -78,7 +80,9 @@ public class Issue extends AbstractPersistable {
         this.assigneeRef = assigneeRef;
     }
     
-    @DBForeignKey(table= Project.class, column= "PROJECT_ID")
+    public static final String PROJECT_ID="PROJECT_ID";
+    
+    @DBForeignKey(table= Project.class, column= PROJECT_ID)
     private Reference projectRef;
     
     public Reference getProjectRef() {
