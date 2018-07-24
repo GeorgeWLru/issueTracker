@@ -175,6 +175,9 @@ public class PersistenceHelper {
             throw e;
         }
         
+        if(persistable==null){
+            throw new NotFoundPersistenceException(id, clazz);
+        }
         return persistable;
     }
     
@@ -238,7 +241,7 @@ public class PersistenceHelper {
             DBUtil.getInstance().executeUpdate(query.toString());
         }
         catch (SQLException ex) {
-            PersistenceException e= new PersistenceException();
+            PersistenceException e= new PersistenceException(ex.getMessage());
             e.addSuppressed(ex);
             throw e;
         }
