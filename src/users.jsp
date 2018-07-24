@@ -5,7 +5,7 @@
 <h3>Список пользователей</h3>
 <div>
 <table border="1">
-<thead><tr><td>id</td><td>Логин</td><td>Имя</td><td>Фамилия</td></tr></thead>
+<thead><tr><td>id</td><td>Логин</td><td>Имя</td><td>Фамилия</td><td>Команды</td></tr></thead>
 <tbody id="tblIssues"></tbody>
 </table>
 <div>
@@ -32,6 +32,7 @@ $.ajax({
                 tbl=tbl+"<td><a href='user.jsp?id="+msg.users[key].id+"'>"+msg.users[key].username+"</td>";
                 tbl=tbl+"<td>"+msg.users[key].firstname+"</td>";
                 tbl=tbl+"<td>"+msg.users[key].lastname+"</td>";
+                tbl=tbl+"<td><a href='deleteuser.jsp?id="+msg.users[key].id+"'>Удалить</a></td>";
                 tbl=tbl+"</tr>";
             }
             $("#error").hide();

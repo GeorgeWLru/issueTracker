@@ -5,13 +5,13 @@
 %>
 
 <div id="success">
-<h3>Проект</h3>
+<h3>Удалить проект?</h3>
 <div>
 <table border="0">
 <tbody id="tblIssues"></tbody>
 </table>
 </div>
-<div><a href="issuesbyproject.jsp?project=<%=id%>">Ошибки проекта</a></div>
+<div><button id="btnOk">Ок</button><button id="btnCancel">Отмена</button></div>
 </div>
 
 <div id="error">
@@ -39,6 +39,33 @@ $.ajax({
         }
     }
 })
+
+$("#btnCancel").on("click", function(event){
+    document.location.replace("projects.jsp");
+})
+
+$("#btnOk").on("click", function(event){
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "jspapi/deleteProject.jsp",
+        data: {id: "<%=id%>"},
+        success: function(msg){
+            if(msg.success=="yes"){
+                alert("Проект удален");
+                document.location.replace("projects.jsp");
+            }
+            else {
+                $("#success").hide();
+                $("#error").show();
+                $("#errorMsg").html(msg.error);
+            }
+        }
+    })
+    
+    
+})
+
 </script>
 
 

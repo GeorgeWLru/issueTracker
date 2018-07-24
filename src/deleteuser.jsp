@@ -5,13 +5,13 @@
 %>
 
 <div id="success">
-<h3>Пользователь</h3>
+<h3>Удалить пользователя?</h3>
 <div>
 <table border="0">
 <tbody id="tblIssues"></tbody>
 </table>
 </div>
-<div><a href="issuesbyuser.jsp?assignee=<%=id%>">Исполнитель в ошибках</a></div>
+<div><button id="btnOk">Ок</button><button id="btnCancel">Отмена</button></div>
 </div>
 
 <div id="error">
@@ -41,6 +41,31 @@ $.ajax({
         }
     }
 })
+
+$("#btnCancel").on("click", function(event){
+    document.location.replace("users.jsp");
+})
+
+$("#btnOk").on("click", function(event){
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "jspapi/deleteUser.jsp",
+        data: {id: "<%=id%>"},
+        success: function(msg){
+            if(msg.success=="yes"){
+                alert("Пользователь удален");
+                document.location.replace("users.jsp");
+            }
+            else {
+                $("#success").hide();
+                $("#error").show();
+                $("#errorMsg").html(msg.error);
+            }
+        }
+    })
+})
+
 </script>
 
 

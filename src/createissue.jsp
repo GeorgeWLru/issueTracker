@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="begin.jspf" %>
 
-<h3>Создать пользователя</h3>
+<h3>Создать описание ошибки</h3>
 
 <div id="success">
 <form>

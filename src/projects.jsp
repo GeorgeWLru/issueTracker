@@ -2,10 +2,10 @@
 <%@ include file="begin.jspf" %>
 
 <div id="success">
-<h3>Список пользователей</h3>
+<h3>Список проектов</h3>
 <div>
 <table border="1">
-<thead><tr><td>id</td><td>Название</td></tr></thead>
+<thead><tr><td>id</td><td>Название</td><td>Команды</td></tr></thead>
 <tbody id="tblIssues"></tbody>
 </table>
 </div>
@@ -29,7 +29,8 @@ $.ajax({
             for (var key in msg.projects){
                 tbl=tbl+"<tr>";
                 tbl=tbl+"<td>"+msg.projects[key].id+"</td>";
-                tbl=tbl+"<td><a href='project.jsp?id="+msg.projects[key].id+"'>"+msg.projects[key].name+"</td>";
+                tbl=tbl+"<td><a href='project.jsp?id="+msg.projects[key].id+"'>"+msg.projects[key].name+"</a></td>";
+                tbl=tbl+"<td><a href='deleteproject.jsp?id="+msg.projects[key].id+"'>Удалить</a></td>";
                 tbl=tbl+"</tr>";
             }
             $("#error").hide();
@@ -41,6 +42,8 @@ $.ajax({
         }
     }
 })
+
+
 </script>
 
 

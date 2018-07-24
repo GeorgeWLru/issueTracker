@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="begin.jspf" %>
+<%
+    String id= request.getParameter("assignee");
+%>
 
 <div id="success">
-<h3>Список ошибок</h3>
+<h3>Список ошибок по пользователю</h3>
 <div>
 <table border="1">
-<thead><tr><td>id</td><td>Тема</td><td>Описание</td><td>Приоритет</td><td>Проект</td><td>Исполнитель</td><td>Команды</td></tr></thead>
+<thead><tr><td>id</td><td>Тема</td><td>Описание</td><td>Приоритет</td><td>Проект</td><td>Исполнитель</td></tr></thead>
 <tbody id="tblIssues"></tbody>
 </table>
-</div>
-
-<div>
-<a href="createissue.jsp">Создать новое описание ошибки</a>
 </div>
 
 </div>
@@ -25,7 +24,8 @@
 $.ajax({
     type: "get",
     dataType: "json",
-    url: "jspapi/getIssues.jsp",
+    url: "jspapi/getIssuesByAssignee.jsp",
+    data: {assignee: "<%=id%>"},
     success: function(msg){
         if(msg.success=="yes"){
             var tbl="";
@@ -37,7 +37,6 @@ $.ajax({
                 tbl=tbl+"<td>"+msg.issues[key].priority+"</td>";
                 tbl=tbl+"<td><a href='project.jsp?id="+msg.issues[key].projectId+"'>проект</a></td>";
                 tbl=tbl+"<td><a href='user.jsp?id="+msg.issues[key].assigneeId+"'>пользователь</a></td>";
-                tbl=tbl+"<td><a href='deleteissue.jsp?id="+msg.issues[key].id+"'>Удалить</a></td>";
                 tbl=tbl+"</tr>";
             }
             $("#error").hide();
