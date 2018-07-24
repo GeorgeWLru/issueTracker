@@ -1,10 +1,15 @@
 package ru.georgewl.epam.it.persistence;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,12 +20,23 @@ import java.util.logging.Logger;
 class DBUtil {
     
     private static DBUtil instance= null;
-    private static final String DBROOT= "D:/PROJECTS/tomcat_root/webapps/issueTracker/";
+    private static String DBROOT= "D:/PROJECTS/tomcat_root/webapps/issueTracker/";
+    
+    private static void loadConfigs() throws IOException {
+        File file= new File("dbutil.properties");
+        
+        FileInputStream fis= new FileInputStream(file);
+        Properties props= new Properties();
+        props.load(fis);
+        String path= props.getProperty("DBROOT");
+        DBROOT= path;
+    }
     
     static {
         try {
             Class.forName("org.h2.Driver");
-        } catch (ClassNotFoundException ex) {
+            loadConfigs();
+        } catch (ClassNotFoundException | IOException ex) {
             Logger.getLogger(DBUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
