@@ -3,7 +3,7 @@ package ru.georgewl.epam.it.model;
 import ru.georgewl.epam.it.persistence.*;
 
 /**
- *
+ * Represents issue
  * @author Yury Belozyorov, PTS
  */
 @DBTable("ISSUE")

@@ -5,7 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- *
+ * Realize common methods of Persistable. <br/>
+ * You should implement this class to make exact modeled object.
  * @author Yury Belozyorov, PTS
  */
 public abstract class AbstractPersistable implements Persistable {

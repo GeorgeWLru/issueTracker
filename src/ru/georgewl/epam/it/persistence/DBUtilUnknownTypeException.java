@@ -6,7 +6,7 @@
 package ru.georgewl.epam.it.persistence;
 
 /**
- *
+ * Raises on unimplemented database type
  * @author Yury Belozyorov, PTS
  */
 public class DBUtilUnknownTypeException extends Exception {

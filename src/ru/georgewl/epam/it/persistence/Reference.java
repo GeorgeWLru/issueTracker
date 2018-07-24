@@ -1,7 +1,7 @@
 package ru.georgewl.epam.it.persistence;
 
 /**
- *
+ * Class to reference to other persisted object
  * @author Yury Belozyorov, PTS
  */
 public class Reference {

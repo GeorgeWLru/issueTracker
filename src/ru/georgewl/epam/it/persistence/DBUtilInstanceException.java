@@ -1,7 +1,7 @@
 package ru.georgewl.epam.it.persistence;
 
 /**
- *
+ * Common database exception
  * @author Yury Belozyorov, PTS
  */
 public class DBUtilInstanceException extends Exception {

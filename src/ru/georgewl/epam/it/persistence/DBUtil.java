@@ -9,14 +9,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Layer class to access database from PersistenceHelper
  * @author Yury Belozyorov, PTS
  */
 class DBUtil {
     
     private static DBUtil instance= null;
     private static final String DBROOT= "D:/PROJECTS/tomcat_root/webapps/issueTracker/";
-    
     
     static {
         try {

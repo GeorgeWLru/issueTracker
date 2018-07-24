@@ -1,7 +1,7 @@
 package ru.georgewl.epam.it.persistence;
 
 /**
- *
+ * Contains methods to make getter and setter names
  * @author Yury Belozyorov, PTS
  */
 public class ReflectHelper {

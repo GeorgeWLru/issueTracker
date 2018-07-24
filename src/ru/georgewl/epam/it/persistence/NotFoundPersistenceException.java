@@ -1,10 +1,13 @@
 package ru.georgewl.epam.it.persistence;
 
-
+/**
+ * Raises if persistent object not found in store
+ * @author user
+ */
 public class NotFoundPersistenceException extends PersistenceException {
     
-    private long id;
-    private Class clazz;
+    private final long id;
+    private final Class clazz;
     
     public NotFoundPersistenceException(long id, Class clazz) {
         this.id= id;

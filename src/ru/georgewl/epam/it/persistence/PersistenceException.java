@@ -1,7 +1,7 @@
 package ru.georgewl.epam.it.persistence;
 
 /**
- *
+ * Common persistence exception
  * @author Yury Belozyorov, PTS
  */
 public class PersistenceException extends Exception {

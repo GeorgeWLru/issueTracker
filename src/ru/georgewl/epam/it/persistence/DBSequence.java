@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
+ * Links modeled object to its id sequence.<br/>
+ * Parameter: sequence name
  * @author Yury Belozyorov, PTS
  */
 @Target(ElementType.TYPE)

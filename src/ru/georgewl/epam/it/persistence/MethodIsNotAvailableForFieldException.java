@@ -3,7 +3,7 @@ package ru.georgewl.epam.it.persistence;
 import java.lang.reflect.Field;
 
 /**
- *
+ * Envelope on reflect exceptions
  * @author Yury Belozyorov, PTS
  */
 public class MethodIsNotAvailableForFieldException extends Exception {

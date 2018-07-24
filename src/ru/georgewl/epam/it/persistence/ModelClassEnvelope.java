@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
 /**
- *
+ * Envelop under modeled class for accessing object persistence info thru annotations
  * @author Yury Belozyorov, PTS
  */
 class ModelClassEnvelope {

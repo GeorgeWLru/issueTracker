@@ -10,7 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Singleton accessor to persistence methods.<br/>
+ * Use static method getInstance() to take access to methods.
  * @author Yury Belozyorov, PTS
  */
 public class PersistenceHelper {
@@ -28,12 +29,24 @@ public class PersistenceHelper {
         private static final PersistenceHelper INSTANCE = new PersistenceHelper();
     }
     
+    /**
+     * Starts database session
+     * @param model object model to work with
+     * @param dbPath path to database
+     * @throws SQLException
+     * @throws DBUtilInstanceException
+     */
     public void start(ObjectModel model, String dbPath) throws SQLException, DBUtilInstanceException {
         this.model= model;
         DBUtil.createInstance(dbPath);
         ensureDB();
     }
     
+    /**
+     * Stops database session
+     * @throws SQLException
+     * @throws DBUtilInstanceException
+     */
     public void stop() throws SQLException, DBUtilInstanceException {
         DBUtil.closeInstance();
     }
@@ -131,6 +144,15 @@ public class PersistenceHelper {
         return pers;
     }
     
+    /**
+     * Finds persistable object in store by class and id and return it
+     * @param <T> 
+     * @param clazz Class of modeled object
+     * @param id id of persistable object
+     * @return persistable object
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public <T extends Persistable> T retrieve(Class<T> clazz, long id) throws PersistenceException, DBUtilInstanceException {
         StringBuilder query= new StringBuilder("select ");
         ModelClassEnvelope mce= model.getClassEnvelope(clazz);
@@ -181,6 +203,12 @@ public class PersistenceHelper {
         return persistable;
     }
     
+    /**
+     * Changes persisted object in store
+     * @param persistable persistable to change
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public void update(Persistable persistable) throws PersistenceException, DBUtilInstanceException {
         try {
             ModelClassEnvelope mce= model.getClassEnvelope(persistable.getClass());
@@ -230,6 +258,12 @@ public class PersistenceHelper {
             
     }
     
+    /**
+     * Deletes persistable from store.
+     * @param persistable persistable object
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public void delete(Persistable persistable) throws PersistenceException, DBUtilInstanceException {
         try {
             ModelClassEnvelope mce= model.getClassEnvelope(persistable.getClass());
@@ -248,6 +282,12 @@ public class PersistenceHelper {
         
     }
     
+    /**
+     * Persists persistable to store (adds new row to table)
+     * @param persistable object to place to store
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public void persist(Persistable persistable) throws PersistenceException, DBUtilInstanceException {
         try {
             ModelClassEnvelope mce= model.getClassEnvelope(persistable.getClass());
@@ -299,6 +339,13 @@ public class PersistenceHelper {
         }
     }
     
+    /**
+     * Checks if persistable presents in store
+     * @param persistable object to check
+     * @return true if object presents in store, else false
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public boolean isPersisted(Persistable persistable) throws DBUtilInstanceException, PersistenceException {
         boolean result= false;
         ModelClassEnvelope mce= model.getClassEnvelope(persistable.getClass());
@@ -323,6 +370,12 @@ public class PersistenceHelper {
         return result;
     }
     
+    /**
+     * Updates persistable object if its already presents in store, else persists it
+     * @param persistable persistable object
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public void save(Persistable persistable) throws PersistenceException, DBUtilInstanceException {
         if(isPersisted(persistable)){
             update(persistable);
@@ -332,6 +385,14 @@ public class PersistenceHelper {
         }
     }
     
+    /**
+     * Retrieves all persistable object by class
+     * @param <T>
+     * @param clazz class of object to retrieve
+     * @return list of persisted objects
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public <T extends Persistable> List<T> selectAll(Class<T> clazz) throws PersistenceException, DBUtilInstanceException {
         List<T> result= new LinkedList<>();
         try {
@@ -366,6 +427,16 @@ public class PersistenceHelper {
         return result;
     }
     
+    /**
+     * Retrieves persistable objects by class that is filtered by reference (foreign key)
+     * @param <T>
+     * @param clazz class of objects to retrieve
+     * @param column foreign key column name 
+     * @param ref reference to persistable object to filter by
+     * @return list of persisted objects
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public <T extends Persistable> List<T> selectFilteredByReference(Class<T> clazz, String column, Reference ref) throws PersistenceException, DBUtilInstanceException {
         List<T> result= new LinkedList<>();
         try {
@@ -402,10 +473,22 @@ public class PersistenceHelper {
         return result;
     }
     
+    /**
+     * Creates new Reference by persistable object
+     * @param persistable object to make reference to
+     * @return reference to persistable object
+     */
     public Reference makeReference(Persistable persistable) {
         return new Reference(persistable);
     }
     
+    /**
+     * Restore persistable by its reference
+     * @param ref reference to persistable
+     * @return persistable
+     * @throws PersistenceException on persistence errors
+     * @throws DBUtilInstanceException on base errors
+     */
     public Persistable getPersistable(Reference ref) throws PersistenceException, DBUtilInstanceException {
         long id= ref.getId();
         Class<? extends Persistable> c= ref.getClazz();
