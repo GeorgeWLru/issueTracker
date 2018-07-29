@@ -1,5 +1,6 @@
 package ru.georgewl.epam.it;
 
+import com.alibaba.fastjson.JSON;
 import java.util.List;
 import ru.georgewl.epam.it.model.Issue;
 import ru.georgewl.epam.it.model.Project;
@@ -145,9 +146,14 @@ public class Test {
         PersistenceHelper.getInstance().stop();
     }
     
+    public static void test10() throws Exception {
+        Issue n= JSON.parseObject("{\"description\":\"Some bug occure\",\"id\":140,\"priority\":10,\"topic\":\"one more\",\"type\":\"bug\"}", Issue.class);
+        System.out.println(n.getTopic());
+    }
+    
     
     public static void main(String[] args) throws Exception {
-        test9();
+        test10();
     }
     
 }
