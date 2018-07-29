@@ -46,8 +46,6 @@ $("#btnCreate").on("click", function(event){
     var fields = $( ":input" ).serializeArray();
     var params= $.param(fields);
     
-    alert(params);
-    
     $.ajax({
         type: "get",
         dataType: "json",
