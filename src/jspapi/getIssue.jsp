@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="ru.georgewl.epam.it.persistence.PersistenceHelper" %>
-<%@ page import="ru.georgewl.epam.it.model.Issue" %>
+<%@ page import="ru.georgewl.epam.it.Issue" %>
 
 <%
     out.clear();
