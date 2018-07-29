@@ -1,6 +1,5 @@
 package ru.georgewl.epam.it;
 
-import ru.georgewl.epam.it.model.*;
 import ru.georgewl.epam.it.persistence.ObjectModel;
 import ru.georgewl.epam.it.persistence.Persistable;
 

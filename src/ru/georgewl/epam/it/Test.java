@@ -2,9 +2,6 @@ package ru.georgewl.epam.it;
 
 import com.alibaba.fastjson.JSON;
 import java.util.List;
-import ru.georgewl.epam.it.model.Issue;
-import ru.georgewl.epam.it.model.Project;
-import ru.georgewl.epam.it.model.User;
 import ru.georgewl.epam.it.persistence.DBUtilUnknownTypeException;
 import ru.georgewl.epam.it.persistence.PersistenceHelper;
 import ru.georgewl.epam.it.persistence.Reference;

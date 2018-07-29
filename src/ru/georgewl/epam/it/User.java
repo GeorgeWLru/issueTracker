@@ -1,4 +1,4 @@
-package ru.georgewl.epam.it.model;
+package ru.georgewl.epam.it;
 
 import ru.georgewl.epam.it.persistence.*;
 
