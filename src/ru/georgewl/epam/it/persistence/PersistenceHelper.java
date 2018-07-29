@@ -123,11 +123,13 @@ public class PersistenceHelper {
         try {
             pers= clazz.newInstance();
             pers.setId(id);
+            // obtain fields
             for(String key : fieldKeys) {
                 Object o= rs.getObject(key);
                 Field f= mce.getFieldsMap().get(key);
                 pers.setFieldValue(f, o);
             }
+            // obtain references
             for(String key : refKeys) {
                 long o= rs.getLong(key);
                 Field f= mce.getRefsMap().get(key);
@@ -494,6 +496,10 @@ public class PersistenceHelper {
         Class<? extends Persistable> c= ref.getClazz();
         Persistable p= retrieve(c, id);
         return p;
+    }
+    
+    public Class<? extends Persistable> getClassByAlias(String alias) {
+        return model.getClassByAlias(alias);
     }
     
 }
